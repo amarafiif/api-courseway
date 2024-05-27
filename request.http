@@ -1,0 +1,460 @@
+# ------------------------------------ AUTH ------------------------------------
+### register
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "nama":"aldi",
+    "email":"200401141@student.umri.ac.id",
+    "no_telp":"081368094422",
+    "password":"password123",
+    "ConfirmationPassword":"password123"
+}
+
+### verify otp
+POST http://localhost:3000/auth/verify-otp
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+
+{
+    "otp":"546088"
+}
+
+#### resend otp
+POST http://localhost:3000/auth/resend-otp
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+
+### login
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email":"200401141@student.umri.ac.id",
+    "password":"password123"
+}
+
+### RESET PASSWORD
+POST http://localhost:3000/auth/reset-password
+Content-Type: application/json
+
+{
+    "email":"200401141@student.umri.ac.id"
+}
+
+### CHANGE PASSWORD BY TOKEN (TANPA LOGIN)
+PUT http://localhost:3000/auth/reset-password?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjo0NSwiZW1haWwiOiIyMDA0MDExNDFAc3R1ZGVudC51bXJpLmFjLmlkIiwiaWF0IjoxNzAyNDgwMjEwfQ.bsBSDAnx3uVi8qn3p88SZe9Y1EmZ_10nWet21UUIFDw
+Content-Type: application/json
+
+{
+    "password":"aldi123",
+    "confirmationPassword":"aldi123"
+}
+
+### GET USER BY TOKEN
+GET http://localhost:3000/auth/whoami
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+
+# ------------------------------------ PROFILE ------------------------------------
+
+### getAllAccount
+GET http://localhost:3000/profile
+
+### getAccountById
+GET http://localhost:3000/profile/361
+
+### updateProfilebyId
+PUT http://localhost:3000/profile/18
+Content-Type: application/json
+
+{
+    "negara": "indonesia",
+    "kota": "pekanbaru"
+}
+
+### Logout
+POST http://localhost:3000/profile/logout
+
+
+### GetAccountByLogin
+GET http://localhost:3000/profile/account
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+
+
+### updateProfilebyLogin
+PUT http://localhost:3000/profile/updateProfile
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+
+{
+    "nama":"ahmad aldi",
+    "no_telp":"01",
+    "negara": "Indojayapura",
+    "kota": "pekanbaru"
+}
+
+### Change Password By Login
+PUT http://localhost:3000/profile/changePassword
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+
+{
+    "password_lama": "aldi123",
+    "password_baru": "aldi123",
+    "Confirmationpassword_baru": "aldi123"
+}
+
+### GetRiwayatPembayaranByLogin
+GET http://localhost:3000/profile/paymentHistory
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+
+# ------------------------------------ CATEGORY ------------------------------------
+### GET ALL CATEGORY
+GET http://localhost:3000/category
+
+### CREATE CATEGORY
+POST http://localhost:3000/category
+Content-Type: application/json
+
+{
+    "title" : "Web Development",
+    "deskripsi" : "Belajar membangun website yang dinamis seperti toko online dengan teknologi web development terbaru"
+}
+
+### GET CATEGORY BY ID
+GET http://localhost:3000/category/2
+
+### PUT UPDATE CATEGORY
+PUT http://localhost:3000/category/3
+Content-Type: application/json
+
+{
+    "title":"Data analis",
+    "deskripsi":"mempelajari cara menganalisis dan menginterpretasi data untuk mendapatkan wawasan dan informasi yang berharga"
+}
+
+### DELETE CATEGORY BY ID
+DELETE http://localhost:3000/category/2
+
+
+# ------------------------------------ COURSE ------------------------------------
+
+### GetAllCourse
+GET http://localhost:3000/course
+
+### AddCourse
+POST http://localhost:3000/course/addCourse
+Content-Type: application/json
+
+{
+    "title":"UI/UX untuk pemula",
+    "mentor_id": 1,
+    "deskripsi":"Course UI/UX untuk kamu mau yang baru mau mulai",
+    "kategori_id":2,
+    "harga":0,
+    "premium":false,
+    "level":"Beginner"
+}
+
+### GetCourseByCategory
+GET http://localhost:3000/course/filter?title=UI/UX untuk pemula
+
+###
+GET http://localhost:3000/course/search?title=ui
+
+
+# ------------------------------------ VIDEO ------------------------------------
+### GET ALL VIDEO
+GET http://localhost:3000/video
+
+### CREATE VIDEO
+POST http://localhost:3000/video
+Content-Type: application/json
+
+{
+    "chapter_id":14,
+    "title":"UI/UX DESIGN II PART IV",
+    "deskripsi":"belajar UI/UX DESIGN II PART IV PREM",
+    "url_video":"https://youtu.be/DwTkyMJi890",
+    "is_preview":false
+}
+
+### GET VIDEO BY ID
+GET http://localhost:3000/video/2
+
+### GET VIDEO BY CHAPTER
+GET http://localhost:3000/video/chapter/3
+
+### UPDATE VIDEO
+PUT http://localhost:3000/video/106
+Content-Type: application/json
+
+{
+    "chapter_id":5,
+    "title":"new",
+    "deskripsi":"belajar new PREM",
+    "url_video":"httpssss://youtu.be/DwTkyMJi890",
+    "is_preview":true
+}
+
+### DELETE VIDEO BY ID
+DELETE http://localhost:3000/video/106
+
+# ------------------------------------ ### ------------------------------------
+
+###
+GET https://binar-academy-final-project.vercel.app
+
+
+### Get All User Course
+GET http://localhost:3000/class
+
+### Get User Course By login
+GET http://localhost:3000/class/myclass
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+
+### ----------------------------------CHAPTER------------------------------------
+### GET ALL CHAPTER
+GET http://localhost:3000/chapter/
+
+### GET CHAPTER BY COURSE ID
+GET http://localhost:3000/chapter/1
+
+### ADD CHAPTER
+POST http://localhost:3000/chapter/addChapter
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+
+{
+    "chapter_title": "Chapter 3 - Masuk materi kedua",
+    "course_id": 1,
+    "video_id": 4
+}
+
+### UPDATE CHAPTER BY CHAPTER_ID
+PUT http://localhost:3000/chapter/updateChapter/4
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+
+{
+    "chapter_title": "Chapter 2 - Masuk materi yuk!",
+    "course_id": 1,
+    "video_id": 4
+}
+
+### DELETE CHAPTER BY CHAPTER_ID
+DELETE http://localhost:3000/chapter/deleteChapter/9
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+
+###------------------------------------ RATING -----------------------------------
+
+###POST create rating
+POST http://localhost:3000/rating/rate
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+Content-Type: application/json
+
+{
+    "course_id" : 1,
+    "skor": 3,
+    "comment": "This course was really helpful!"
+}
+
+###GET all rating
+GET http://localhost:3000/rating
+
+###GET all rating by course_id
+GET http://localhost:3000/rating?course_id=1
+
+###GET all rating by course_id
+GET http://localhost:3000/rating?skor=4
+
+###GET all rating by rating_id
+GET http://localhost:3000/rating?rating_id=3
+
+###GET all rating by rating_id
+GET http://localhost:3000/rating?course_id=1&skor=3
+
+
+###GET all rating by login
+GET http://localhost:3000/rating/myRates
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+
+
+### PUT UPDATE RATING
+PUT http://localhost:3000/rating/2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+Content-Type: application/json
+
+{
+    "course_id" : 1,
+    "skor": 1,
+    "comment": "This course was really not helpful!"
+}
+
+### DELETE  RATING
+DELETE  http://localhost:3000/rating/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+
+###--------------------------------MENTOR--------------------------------------
+
+###GET ALL MENTOR
+GET http://localhost:3000/mentor
+
+###post create mentor
+POST http://localhost:3000/mentor
+Content-Type: application/json
+
+{
+    "name" : "suraoymo",
+    "job": "fullstack developer"
+}
+
+###get mentor by id
+GET http://localhost:3000/mentor/1
+
+
+###------------------------------------ NOTIFICATION -----------------------------------
+GET http://localhost:3000/notification
+
+### CREATE NOTIFICATION PER ID USER
+POST http://localhost:3000/notification
+Content-Type: application/json
+
+{
+    "account_id" : 36,
+    "title" :"new notif2",
+    "deskripsi" : "ini test notif"
+}
+
+### GET NOTIFICATION BY ID
+GET http://localhost:3000/notification/111
+
+### GET NOTIFICATION BY LOGIN
+GET http://localhost:3000/notification/myNotifications
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+
+### CREATE NOTIF BROADCAST
+POST http://localhost:3000/notification/broadcast
+Content-Type: application/json
+
+{
+    "title" :"PROMO TODAY!!",
+    "deskripsi" : "PROMO INI BERLAKU HARI INI"
+}
+
+
+### ----------------------------------PROMO------------------------------------
+### GET ALL PROMO
+GET http://localhost:3000/promo/
+
+### GET PROMO BY PROMO ID
+GET http://localhost:3000/promo/3
+
+### ADD PROMO
+POST http://localhost:3000/promo/addPromo
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+
+{
+    "course_id": 1,
+    "title": "Promo akhir tahun",
+    "deskripsi": "Promo berlaku bagi semua user!",
+    "tanggal_mulai": "2023-12-17T00:00:00Z",
+    "tanggal_selesai": "2023-12-31T23:59:59Z",
+    "total_promo": 50000
+}
+### format waktu di tanggal_mulai dan tanggal_selesai
+### tahun-bulan-tanggal+T+jam-menit-detik+Z
+
+### UPDATE PROMO
+PUT http://localhost:3000/promo/updatePromo/1
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+
+{
+    "title": "Promo tahun baru",
+    "deskripsi": "Promo berlaku bagi semua user!",
+    "tanggal_mulai": "2023-12-01T00:00:00Z",
+    "tanggal_selesai": "2023-12-31T23:59:59Z",
+    "total_promo": 50000
+}
+
+### DELETE PROMO
+DELETE  http://localhost:3000/promo/deletePromo/2
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+
+###------------------------------------ PAYMENT -----------------------------------
+### GET PAYMENT
+GET http://localhost:3000/payment
+
+### CREATE PAYMENT
+POST http://localhost:3000/payment
+Content-Type: application/json
+
+{
+    "account_id" : 2,
+    "course_id" : 1
+}
+
+### GET PAYMENT BY ID
+GET http://localhost:3000/payment/2
+
+### UPDATE PAYMENT BY ID
+PUT http://localhost:3000/payment/2
+Content-Type: application/json
+
+{
+    "metode_pembayaran" : "Debit Card"
+}
+
+### GET PAYMENT BY LOGIN WITH FILTER SEARCH
+GET http://localhost:3000/payment/checkout
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+
+### CREATE PAYMENT BY LOGIN
+POST http://localhost:3000/payment/checkout
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+
+{
+    "course_id" : 5
+}
+
+### UPDATE PAYMENT BY LOGIN
+PUT http://localhost:3000/payment/checkout
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+
+{
+    "course_id" : 5,
+    "metode_pembayaran" : "ShopeePay Later"
+}
+
+###------------------------------------ COURSE PROGRESS -----------------------------------
+GET http://localhost:3000/course-progress
+
+### CREATE COURSE PROGRESS
+POST http://localhost:3000/course-progress
+Content-Type: application/json
+
+{
+    "account_id" : 38,
+    "course_id" : 2,
+    "video_id" : 2
+}
+
+### GET COURSE PROGRESS BY ID
+GET http://localhost:3000/course-progress/1
+
+### GET COURSE PROGRESS BY LOGIN
+GET http://localhost:3000/course-progress/myProgress
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50X2lkIjoxOCwiZW1haWwiOiJhbGRpc2lyb2phdEBnbWFpbC5jb20iLCJpYXQiOjE3MDQxODgxMDl9.-39KpDJLucvEg6x6kGC0vJVzUZo19_EWcXRBAwT4clA
+
+###
+GET https://binar-academy-final-project.vercel.app/course/1
+Content-Type: application/json
+
+{
+    "account_id": 13
+}

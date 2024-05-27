@@ -1,0 +1,195 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// prisma/schema.prisma
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// schema.prisma
+
+// Tabel Account
+model Account {
+  account_id        Int                 @id @default(autoincrement())
+  nama              String?
+  email             String              @unique
+  password          String
+  otp               Otp?
+  no_telp           String?
+  negara            String?
+  kota              String?
+  role              String              @default("user")
+  url_image         String?
+  is_verified       Boolean             @default(false)
+  created_at        DateTime            @default(now())
+  updated_at        DateTime            @updatedAt
+  User_course       User_course[]
+  Course_progress   Course_progress[]
+  Rating            Rating[]
+  Riwayat_Transaksi Riwayat_Transaksi[]
+  Notifikasi        Notifikasi[]
+}
+
+// Tabel OTP
+model Otp {
+  otp_id     Int      @id @default(autoincrement())
+  otp        String?
+  created_at DateTime @default(now())
+  account    Account  @relation(fields: [account_id], references: [account_id])
+  account_id Int      @unique
+}
+
+// Tabel Mentor
+model Mentor {
+  mentor_id     Int             @id @default(autoincrement())
+  name          String?
+  job           String?
+  Mentor_course Mentor_course[]
+  Course        Course[]
+}
+
+// Tabel Kategori
+model Kategori {
+  kategori_id     Int      @id @default(autoincrement())
+  title           String?
+  deskripsi       String?
+  url_img_preview String?
+  Course          Course[]
+}
+
+// Tabel Course
+model Course {
+  course_id         Int                 @id @default(autoincrement())
+  title             String?
+  deskripsi         String?
+  kode_kelas        String?
+  kategori_id       Int
+  premium           Boolean             @default(false)
+  mentor_id         Int
+  level             String
+  harga             Float
+  url_image_preview String?
+  url_gc_tele       String?
+  is_visible        Boolean             @default(true)
+  created_at        DateTime            @default(now())
+  updated_at        DateTime            @updatedAt
+  Kategori          Kategori            @relation(fields: [kategori_id], references: [kategori_id])
+  Mentor            Mentor              @relation(fields: [mentor_id], references: [mentor_id])
+  Chapter           Chapter[]
+  User_course       User_course[]
+  Mentor_course     Mentor_course[]
+  Course_progress   Course_progress[]
+  Rating            Rating[]
+  Promo             Promo[]
+  Riwayat_Transaksi Riwayat_Transaksi[]
+}
+
+// Tabel Chapter
+model Chapter {
+  chapter_id Int     @id @default(autoincrement())
+  title      String
+  course_id  Int
+  Course     Course  @relation(fields: [course_id], references: [course_id])
+  Video      Video[]
+}
+
+// Tabel Video
+model Video {
+  video_id        Int               @id @default(autoincrement())
+  chapter_id      Int
+  title           String
+  deskripsi       String?
+  url_video       String
+  is_preview      Boolean           @default(false)
+  Chapter         Chapter           @relation(fields: [chapter_id], references: [chapter_id])
+  Course_progress Course_progress[]
+}
+
+// Tabel User_course
+model User_course {
+  user_course_id Int     @id @default(autoincrement())
+  account_id     Int
+  course_id      Int
+  Account        Account @relation(fields: [account_id], references: [account_id])
+  Course         Course  @relation(fields: [course_id], references: [course_id])
+}
+
+// Tabel Mentor_course
+model Mentor_course {
+  mentor_course_id Int    @id @default(autoincrement())
+  mentor_id        Int
+  course_id        Int
+  Mentor           Mentor @relation(fields: [mentor_id], references: [mentor_id])
+  Course           Course @relation(fields: [course_id], references: [course_id])
+}
+
+// Tabel Course_progress
+model Course_progress {
+  course_progres_id Int      @id @default(autoincrement())
+  account_id        Int
+  course_id         Int
+  video_id          Int
+  is_done           Boolean  @default(false)
+  last_access       DateTime @default(now())
+  Account           Account  @relation(fields: [account_id], references: [account_id])
+  Course            Course   @relation(fields: [course_id], references: [course_id])
+  Video             Video    @relation(fields: [video_id], references: [video_id])
+}
+
+// Tabel Rating
+model Rating {
+  rating_id  Int     @id @default(autoincrement())
+  account_id Int
+  course_id  Int
+  skor       Int?
+  comment    String?
+  Account    Account @relation(fields: [account_id], references: [account_id])
+  Course     Course  @relation(fields: [course_id], references: [course_id])
+}
+
+// Tabel Promo
+model Promo {
+  promo_id        Int      @id @default(autoincrement())
+  course_id       Int
+  title           String
+  deskripsi       String?
+  tanggal_mulai   DateTime
+  tanggal_selesai DateTime
+  total_promo     Int
+  Course          Course   @relation(fields: [course_id], references: [course_id])
+}
+
+// Tabel Riwayat_Transaksi
+model Riwayat_Transaksi {
+  riwayat_transaksi_id Int       @id @default(autoincrement())
+  account_id           Int
+  course_id            Int
+  metode_pembayaran    String    @default("-")
+  tanggal_pembayaran   DateTime?
+  status               String    @default("Belum Bayar")
+  Account              Account   @relation(fields: [account_id], references: [account_id])
+  Course               Course    @relation(fields: [course_id], references: [course_id])
+}
+
+model Notifikasi {
+  notifikasi_id Int       @id @default(autoincrement())
+  account_id    Int
+  title         String?
+  deskripsi     String?
+  is_read       Boolean   @default(false)
+  created_at    DateTime? @default(now())
+  Account       Account   @relation(fields: [account_id], references: [account_id])
+}
+
+model Salary {
+  salary_id Int     @id @default(autoincrement())
+  course_id Int
+  gaji_dn   String?
+  gaji_ln   String?
+}
