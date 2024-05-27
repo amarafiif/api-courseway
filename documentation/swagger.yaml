@@ -7,6 +7,8 @@ info:
     email: amarafif230@gmail.com
   version: 1.0.0
 servers:
+  - url: https://api-courseway.kodati.xyz
+  - url: https://binar-academy-final-project.vercel.app
   - url: http://localhost:3000
 
 tags:
