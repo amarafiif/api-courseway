@@ -2097,8 +2097,8 @@ paths:
                 success: true
                 data:
                   pagination:
-                    total_items: 100 # Replace with the actual total number of items
-                    total_pages: 10 # Replace with the actual total number of pages
+                    total_items: 100 
+                    total_pages: 10
                     current_page: 1
                     items_per_page: 10
                   course:
@@ -2109,6 +2109,7 @@ paths:
                       premium: true
                       harga: 49.99
                       level: "Beginner"
+                      url_image_preview: "URL GAMBAR"
                       Kategori:
                         title: "Programming"
                       Mentor:
