@@ -2097,7 +2097,7 @@ paths:
                 success: true
                 data:
                   pagination:
-                    total_items: 100 
+                    total_items: 100
                     total_pages: 10
                     current_page: 1
                     items_per_page: 10
@@ -4300,8 +4300,6 @@ components:
         chapter_title:
           type: string
         course_id:
-          type: integer
-        video_id:
           type: integer
 
     ChapterResponse:
