@@ -64,7 +64,7 @@ app.use(
 app.use("/", (req, res) => {
 	try {
 		const welcomeMessage = {
-			message: "OK - You're connected to backend server CourseWay!",
+			message: "OK - You're connected to production backend server CourseWay!",
 		};
 		res.json(welcomeMessage);
 	} catch (error) {
